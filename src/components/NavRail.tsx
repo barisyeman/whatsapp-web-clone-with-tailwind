@@ -4,10 +4,11 @@ import { ReactNode } from "react";
 type NavIconProps = {
   active?: boolean;
   dot?: boolean;
+  badge?: number;
   children: ReactNode;
 };
 
-function NavIcon({ active, dot, children }: NavIconProps) {
+function NavIcon({ active, dot, badge, children }: NavIconProps) {
   return (
     <button
       className={`relative flex h-10 w-10 items-center justify-center rounded-full transition-colors ${
@@ -19,6 +20,11 @@ function NavIcon({ active, dot, children }: NavIconProps) {
       {children}
       {dot && (
         <span className="absolute right-0.5 top-0.5 h-2 w-2 rounded-full bg-[#25d366]" />
+      )}
+      {badge !== undefined && badge > 0 && (
+        <span className="absolute -right-[5px] -top-[6px] flex h-[20px] min-w-[20px] items-center justify-center rounded-full bg-[#1daa61] px-1 text-[12px] font-medium leading-none text-white">
+          {badge > 99 ? "99+" : badge}
+        </span>
       )}
     </button>
   );
@@ -80,8 +86,8 @@ function CommunityIcon() {
   return (
     <svg
       viewBox="0 0 32 32"
-      height="24"
-      width="24"
+      height="32"
+      width="32"
       preserveAspectRatio="xMidYMid meet"
       fill="none"
     >
@@ -173,11 +179,11 @@ function ChannelsIcon() {
 export default function NavRail() {
   return (
     <aside
-      className="relative z-[200] flex h-full w-16 min-w-16 flex-col items-center border-r border-[#e9e4de] px-3 py-2.5 text-[#0a0a0a] select-none"
+      className="relative z-[200] flex h-full w-[65px] min-w-[65px] flex-col items-center border-r border-[#d9d3cc] px-3 py-2.5 text-[#0a0a0a] select-none"
       style={{ backgroundColor: "rgb(247, 245, 243)" }}
     >
-      <div className="flex flex-col gap-1">
-        <NavIcon active>
+      <div className="mt-0.5 flex flex-col gap-1">
+        <NavIcon active badge={1}>
           <ChatIcon />
         </NavIcon>
         <NavIcon dot>
@@ -191,16 +197,16 @@ export default function NavRail() {
         </NavIcon>
       </div>
 
-      <div className="mt-auto flex flex-col items-center gap-1">
+      <div className="mt-auto mb-[13px] flex flex-col items-center gap-1">
         <NavIcon>
           <FilterIcon />
         </NavIcon>
-        <button className="relative h-8 w-8 overflow-hidden rounded-full">
+        <button className="relative mt-[2px] h-7 w-7 overflow-hidden rounded-full">
           <Image
             src="/woman.avif"
             alt="Profile"
             fill
-            sizes="32px"
+            sizes="28px"
             className="object-cover"
           />
         </button>
